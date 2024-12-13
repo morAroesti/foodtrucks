@@ -1,0 +1,52 @@
+services:
+  es:
+    image: elasticsearch:7.17.26
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+    networks:
+      - foodtruck_network_db
+    volumes:
+      - db_data:/usr/share/elasticsearch/data
+
+  flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - es
+    environment:
+      - ELASTICSEARCH_HOST=es
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - foodtruck_network_db
+      - entry_network
+
+  nginx:
+    image: nginx:alpine
+    networks:
+      - entry_network
+    ports:
+      - 8080:8080
+    container_name: nginx_frontend
+    depends_on:
+      flask-app:
+        condition: service_healthy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+networks:
+  foodtruck_network_db:
+    driver: bridge
+  entry_network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
