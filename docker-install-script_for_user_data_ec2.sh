@@ -33,7 +33,7 @@ systemctl start docker
 docker --version
 
 
-# INSTALL GIT 
+# INSTALL GIT | CONFIG GIT | CLONE SOURCE CODE
 apt-get install -y git
 git --version
 git config --global user.name "Mor Aroesti"
