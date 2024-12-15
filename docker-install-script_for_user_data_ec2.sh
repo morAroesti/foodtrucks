@@ -36,3 +36,5 @@ docker --version
 # INSTALL GIT 
 apt-get install -y git
 git --version
+git config --global user.name "Mor Aroesti"
+git config --global user.email "mor.aroesti@gmail.com"
