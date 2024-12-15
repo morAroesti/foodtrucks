@@ -22,7 +22,7 @@ sudo echo \
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Add ubuntu user to docker group to run docker without sudo
-usermod -aG docker ubuntu
+sudo usermod -aG docker ubuntu
 
 # Enable and start Docker service
 sudo systemctl enable docker
