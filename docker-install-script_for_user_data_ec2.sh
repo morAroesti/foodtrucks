@@ -43,3 +43,6 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 sudo apt install unzip
 unzip -u awscliv2.zip
 sudo /home/ubuntu/aws/install
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 779846827025.dkr.ecr.ap-south-1.amazonaws.com
+cd /home/ubuntu/workspace/foodtrucks
+docker compose up
