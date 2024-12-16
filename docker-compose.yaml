@@ -11,9 +11,10 @@ services:
       - db_data:/usr/share/elasticsearch/data
 
   flask-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: 779846827025.dkr.ecr.ap-south-1.amazonaws.com/foodtrucks:latest
+#    build:
+#     context: .
+#      dockerfile: Dockerfile
     depends_on:
       - es
     environment:
